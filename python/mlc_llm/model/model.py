@@ -40,6 +40,7 @@ from .qwen2 import qwen2_loader, qwen2_model, qwen2_quantization
 from .qwen2_moe import qwen2_moe_loader, qwen2_moe_model, qwen2_moe_quantization
 from .rwkv5 import rwkv5_loader, rwkv5_model, rwkv5_quantization
 from .rwkv6 import rwkv6_loader, rwkv6_model, rwkv6_quantization
+from .rwkv7 import rwkv7_loader, rwkv7_model, rwkv7_quantization
 from .stable_lm import stablelm_loader, stablelm_model, stablelm_quantization
 from .starcoder2 import starcoder2_loader, starcoder2_model, starcoder2_quantization
 
@@ -422,6 +423,19 @@ MODELS: Dict[str, Model] = {
         quantize={
             "no-quant": rwkv6_quantization.no_quant,
             "group-quant": rwkv6_quantization.group_quant,
+        },
+    ),
+    "rwkv7": Model(
+        name="rwkv7",
+        model=rwkv7_model.RWKV7_ForCasualLM,
+        config=rwkv7_model.RWKV7Config,
+        source={
+            "huggingface-torch": rwkv7_loader.huggingface,
+            "huggingface-safetensor": rwkv7_loader.huggingface,
+        },
+        quantize={
+            "no-quant": rwkv7_quantization.no_quant,
+            "group-quant": rwkv7_quantization.group_quant,
         },
     ),
     "chatglm": Model(
